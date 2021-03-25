@@ -1,4 +1,1 @@
 # TBD
-
-- auth
-- transactional emails
