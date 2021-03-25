@@ -24,3 +24,17 @@ services:
       POSTGRES_USER: 'admin'
       POSTGRES_PASSWORD: 'idk123'
       POSTGRES_DB: 'diaochan'
+
+  web:
+    image: web
+    build:
+      context: web
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./web:/usr/src/web
+    ports:
+      - 3001:3001
+    depends_on:
+      - server
