@@ -10,7 +10,7 @@ export class UsersService {
   constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
   async findOne(username: string): Promise<User | undefined> {
-    const user = await this.userRepository.findOne({ username: username });
+    const user = await this.userRepository.findOne({ username });
     if (!user) {
       throw new NotFoundException('User does not exist');
     }
