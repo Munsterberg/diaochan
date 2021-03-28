@@ -3,12 +3,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    UsersModule,
     AuthModule,
+    UsersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'db',
@@ -18,6 +19,7 @@ import { UsersModule } from './users/users.module';
       database: 'diaochan',
       autoLoadEntities: true,
       synchronize: true,
+      entities: [User]
     }),
   ],
   controllers: [AppController],
