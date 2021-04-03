@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 
 import { useAuth } from '../context/auth-context';
@@ -9,7 +10,7 @@ type FormData = {
 };
 
 export default function Login() {
-  const { register, setValue, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit } = useForm<FormData>();
   const auth = useAuth();
 
   const onSubmit = handleSubmit(({ username, password }) => {
@@ -30,10 +31,12 @@ export default function Login() {
           </h2>
           <p className='mt-2 text-center text-sm text-gray-600'>
             Or
-            <a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
-              {' '}
-              create a new account
-            </a>
+            <Link href='/sign-up'>
+              <a className='font-medium text-indigo-600 hover:text-indigo-500'>
+                {' '}
+                create a new account
+              </a>
+            </Link>
           </p>
         </div>
         <form className='mt-8 space-y-' onSubmit={onSubmit}>
