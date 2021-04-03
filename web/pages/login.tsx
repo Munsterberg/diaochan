@@ -10,10 +10,10 @@ type FormData = {
 
 export default function Login() {
   const { register, setValue, handleSubmit } = useForm<FormData>();
-  const { register: registerUser } = useAuth()
+  const auth = useAuth();
 
   const onSubmit = handleSubmit(({ username, password }) => {
-    registerUser(username, password);
+    auth.login(username, password);
   });
 
   return (
@@ -31,7 +31,7 @@ export default function Login() {
           <p className='mt-2 text-center text-sm text-gray-600'>
             Or
             <a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
-              start your 14-day free trial
+              {' '}create a new account
             </a>
           </p>
         </div>
