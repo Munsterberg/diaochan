@@ -5,15 +5,16 @@ import { useAuth } from '../context/auth-context';
 
 type FormData = {
   username: string;
+  email: string;
   password: string;
 };
 
-export default function Login() {
+export default function SignUp() {
   const { register, setValue, handleSubmit } = useForm<FormData>();
   const auth = useAuth();
 
-  const onSubmit = handleSubmit(({ username, password }) => {
-    auth.login(username, password);
+  const onSubmit = handleSubmit(({ username, email, password }) => {
+    auth.register(username, email, password);
   });
 
   return (
@@ -25,14 +26,12 @@ export default function Login() {
             src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
             alt='Workflow'
           />
-          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-            Sign in to your account
-          </h2>
+          <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>Sign up</h2>
           <p className='mt-2 text-center text-sm text-gray-600'>
-            Or
+            Or if you are an existing user
             <a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
               {' '}
-              create a new account
+              login
             </a>
           </p>
         </div>
@@ -54,6 +53,21 @@ export default function Login() {
               />
             </div>
             <div>
+              <label htmlFor='email' className='sr-only'>
+                Email address
+              </label>
+              <input
+                id='email'
+                name='email'
+                type='email'
+                autoComplete='email'
+                required
+                className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
+                placeholder='Email address'
+                {...register('email', { required: true })}
+              />
+            </div>
+            <div>
               <label htmlFor='password' className='sr-only'>
                 Password
               </label>
@@ -70,23 +84,18 @@ export default function Login() {
             </div>
           </div>
 
-          <div className='flex items-center justify-between'>
+          <div className='flex items-center'>
             <div className='flex items-center'>
               <input
-                id='remember_me'
-                name='remember_me'
+                id='terms'
+                name='terms'
                 type='checkbox'
+                required
                 className='h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded'
               />
               <label htmlFor='remember_me' className='ml-2 block text-sm text-gray-900'>
-                Remember me
+                I Agree to the Terms and Services
               </label>
-            </div>
-
-            <div className='text-sm'>
-              <a href='#' className='font-medium text-indigo-600 hover:text-indigo-500'>
-                Forgot your password?
-              </a>
             </div>
           </div>
 

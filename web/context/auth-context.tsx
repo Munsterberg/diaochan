@@ -4,6 +4,7 @@ import * as auth from '../utils/auth';
 
 type AuthContext = {
   login: (username: string, password: string) => void;
+  register: (username: string, email: string, password: string) => void;
 };
 
 const AuthContext = React.createContext<AuthContext>(null);
@@ -11,27 +12,40 @@ const AuthContext = React.createContext<AuthContext>(null);
 function AuthProvider(props) {
   // TODO: loader for user data here
 
-  const login = (username, password) => {
+  const login = (username: string, password: string) => {
     client(`auth/login`, {
       method: 'POST',
       body: {
         username,
-        password
-      }
+        password,
+      },
     }).then(({ access_token: token }) => auth.login(token));
   };
 
-  const value = React.useMemo(() => ({
-    login,
-  }), [login])
+  const register = (username: string, email: string, password: string) => {
+    client(`auth/register`, {
+      method: 'POST',
+      body: {
+        username,
+        email,
+        password,
+      },
+    }).then(console.log);
+  };
 
-  return (
-    <AuthContext.Provider value={value} {...props} />
-  )
+  const value = React.useMemo(
+    () => ({
+      login,
+      register,
+    }),
+    [login]
+  );
+
+  return <AuthContext.Provider value={value} {...props} />;
 }
 
 function useAuth() {
   return React.useContext(AuthContext);
 }
 
-export { AuthProvider, useAuth }
+export { AuthProvider, useAuth };
