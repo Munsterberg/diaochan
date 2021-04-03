@@ -1,4 +1,4 @@
-const localStorageKey = '__diaochan_token__';
+import { localStorageKey } from './constants';
 
 // TODO: improve this lazy boi
 type Config = {
@@ -23,7 +23,7 @@ export function client(endpoint, { body, method, ...customConfig}) {
     config.body = JSON.stringify(body);
   }
 
-  return window.fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config)
+  return window.fetch(`${process.env.NEXT_PUBLIC_API_URL}/${endpoint}`, config)
     .then(async response => {
       if (response.status === 401) {
         logout();

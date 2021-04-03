@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { client } from '../utils/fetcher';
 
 type AuthContext = {
   register: (username: string, password: string) => void;
@@ -10,7 +11,13 @@ function AuthProvider(props) {
   // TODO: loader for user data here
 
   const register = (username, password) => {
-    console.log(username, password);
+    return client(`auth/login`, {
+      method: 'POST',
+      body: {
+        username,
+        password
+      }
+    })
   };
 
   return (
