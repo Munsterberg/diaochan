@@ -31,8 +31,8 @@ services:
     build:
       context: web
       dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: development
+    env_file:
+      - web/.env.local
     volumes:
       - ./web:/usr/src/web
     ports:
