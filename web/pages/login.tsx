@@ -14,7 +14,9 @@ export default function Login() {
   const auth = useAuth();
 
   const onSubmit = handleSubmit(({ username, password }) => {
-    auth.login(username, password);
+    auth.login(username, password).then(() => {
+      // TODO: redirect here
+    });
   });
 
   return (
