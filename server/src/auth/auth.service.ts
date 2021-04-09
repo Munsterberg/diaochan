@@ -7,7 +7,10 @@ import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService, private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.findOne(username);
@@ -23,7 +26,7 @@ export class AuthService {
     const payload = { username: user.username, sub: user.userId };
     return {
       access_token: this.jwtService.sign(payload),
-    }
+    };
   }
 
   async hashPassword(password: string) {
@@ -34,8 +37,8 @@ export class AuthService {
     const userData = {
       password: await this.hashPassword(createUserDto.password),
       username: createUserDto.username,
-      email: createUserDto.email
+      email: createUserDto.email,
     };
-    return this.usersService.create(userData)
+    return this.usersService.create(userData);
   }
 }
