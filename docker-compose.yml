@@ -31,11 +31,11 @@ services:
     build:
       context: web
       dockerfile: ./Dockerfile
-    env_file:
-      - web/.env.local
+    # env_file:
+    #   - web/.env.local
     volumes:
       - ./web:/usr/src/web
     ports:
-      - 3001:3001
+      - '8080:8080'
     depends_on:
       - server
