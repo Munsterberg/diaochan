@@ -5,5 +5,5 @@ WORKDIR /usr/src/web
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install --silent
 COPY . .
-EXPOSE 3001
-CMD ["npm", "run", "dev"]
+EXPOSE 8080
+CMD ["npm", "run", "serve"]
